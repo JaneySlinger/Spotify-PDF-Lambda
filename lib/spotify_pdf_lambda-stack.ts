@@ -1,15 +1,14 @@
 import * as cdk from '@aws-cdk/core';
-// import * as sqs from '@aws-cdk/aws-sqs';
+import * as s3 from '@aws-cdk/aws-s3'
 
 export class SpotifyPdfLambdaStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'SpotifyPdfLambdaQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new s3.Bucket(this, 'rawImages', {
+      versioned: true,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true
+    });
   }
 }
